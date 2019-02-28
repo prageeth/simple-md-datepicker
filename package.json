@@ -1,13 +1,13 @@
 {
   "name": "@prageeths/simple-md-datepicker",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "A Vanilla JS Material Design date/time picker component",
   "main": "dist/simple-md-datepicker.js",
   "module": "dist/simple-md-datepicker.mjs",
   "jsnext:main": "dist/simple-md-datepicker.mjs",
   "scripts": {
-    "build": "rollup -c",
-    "build:watch": "rollup -c -w",
+    "build": "rollup --config",
+    "build:watch": "rollup --config -w",
     "clean": "rm -r dist/*",
     "lint": "eslint lib/**/*.js",
     "test": "jest"

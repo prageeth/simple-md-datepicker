@@ -346,6 +346,7 @@ var DateTimePicker = function (_Events) {
       this._onWindowKeypress = function (e) {
         if (e.which === ESC_KEY) {
           _this4.close();
+          _this4.trigger('cancel', _this4.value, _this4);
         }
       };
 
