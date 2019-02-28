@@ -312,9 +312,10 @@
       }
     }, {
       key: 'close',
-      value: function close() {
+      value: function close(eventName) {
         this._stopListeningForCloseEvents();
         this._hide();
+        this.trigger(eventName, this.value, this);
       }
     }, {
       key: '_hide',
@@ -351,8 +352,7 @@
 
         this._onWindowKeypress = function (e) {
           if (e.which === ESC_KEY) {
-            _this4.close();
-            _this4.trigger('cancel', _this4.value, _this4);
+            _this4.close('cancel');
           }
         };
 
@@ -429,7 +429,7 @@
         }, false);
 
         this.scrimEl.addEventListener('click', function () {
-          return _this5.close();
+          _this5.close('cancel');
         }, false);
 
         return this;
@@ -437,15 +437,13 @@
     }, {
       key: 'clickSubmit',
       value: function clickSubmit() {
-        this.close();
-        this.trigger('submit', this.value, this);
+        this.close('submit');
         return this;
       }
     }, {
       key: 'clickCancel',
       value: function clickCancel() {
-        this.close();
-        this.trigger('cancel', this.value, this);
+        this.close('cancel');
         return this;
       }
     }, {
