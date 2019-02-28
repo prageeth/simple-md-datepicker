@@ -1,10 +1,10 @@
 {
-  "name": "material-datetime-picker",
-  "version": "2.4.0",
+  "name": "@prageeths/simple-md-datepicker",
+  "version": "0.9.0",
   "description": "A Vanilla JS Material Design date/time picker component",
-  "main": "dist/material-datetime-picker.js",
-  "module": "dist/material-datetime-picker.mjs",
-  "jsnext:main": "dist/material-datetime-picker.mjs",
+  "main": "dist/simple-md-datepicker.js",
+  "module": "dist/simple-md-datepicker.mjs",
+  "jsnext:main": "dist/simple-md-datepicker.mjs",
   "scripts": {
     "build": "rollup -c",
     "build:watch": "rollup -c -w",
@@ -14,16 +14,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ripjar/material-datetime-picker.git"
+    "url": "https://github.com/prageeth/simple-md-datepicker.git"
   },
-  "author": "@jivings",
+  "author": "@prageeths",
   "contributors": [
-    "Joe Whitfield-Seed <joeseed86@gmail.com>"
+    "Prageeth Silva <prageethsilva@gmail.com>"
   ],
   "license": "MIT",
   "dependencies": {
-    "moment": "2.10.6",
     "rome": "https://github.com/jwhitfieldseed/rome.git#19f5d3031a922c29c52b9038b2832a827e5e99d6"
+  },
+  "peerDependencies": {
+    "moment": "^2.10.6"
   },
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.18.0",

@@ -6,11 +6,11 @@ const pkg = require('./package.json');
 const external = Object.keys(pkg.dependencies);
 
 export default {
-  entry: 'lib/js/index.js',
+  input: 'lib/js/index.js',
   plugins: [
     sass({
       // FIXME: source maps #100
-      output: 'dist/material-datetime-picker.css'
+      output: 'dist/simple-md-datepicker.css'
     }),
     babel(babelrc())
   ],
@@ -19,16 +19,16 @@ export default {
     rome: 'rome',
     moment: 'moment'
   },
-  targets: [
+  output: [
     {
-      dest: pkg.main,
+      file: pkg.main,
       format: 'umd',
-      moduleName: 'MaterialDatetimePicker',
+      name: 'MaterialDatetimePicker',
       sourceMap: true
     },
     {
-      dest: pkg.module,
-      format: 'es',
+      file: pkg.module,
+      format: 'esm',
       sourceMap: true
     }
   ]

@@ -1,5 +1,4 @@
 import rome from 'rome';
-import moment from 'moment';
 
 var popupTemplate = (function () {
   return "\n<div class=\"c-datepicker\">\n  <a class=\"c-datepicker__toggle c-datepicker__toggle--right c-datepicker--show-time js-show-clock\" title=\"show time picker\">\n  </a>\n\n  <a class=\"c-datepicker__toggle c-datepicker__toggle--left c-datepicker--show-calendar is-selected js-show-calendar\" title=\"show date picker\">\n  </a>\n\n  <div class=\"c-datepicker__header\">\n    <div class=\"c-datepicker__header-day\">\n      <span class=\"js-day\">Monday</span>\n    </div>\n    <div class=\"c-datepicker__header-date\">\n      <span class=\"c-datepicker__header-date__month js-date-month\"></span>\n      <span class=\"c-datepicker__header-date__day js-date-day\"></span>\n      <span class=\"c-datepicker__header-date__time js-date-time\">\n        <span class=\"c-datepicker__header-date__hours js-date-hours active\">09</span>:<span class=\"c-datepicker__header-date__minutes js-date-minutes\">00</span>\n      </span>\n    </div>\n  </div>\n\n  <div class=\"c-datepicker__calendar\"></div>\n  <div class=\"c-datepicker__clock\">\n    <div class=\"c-datepicker__clock__am-pm-toggle\">\n      <label class=\"c-datepicker__toggle--checked\">\n        <input checked=\"checked\" class=\"c-datepicker__toggle c-datepicker__toggle--right c-datepicker__clock--am\" type=\"radio\" name=\"time-date-toggle\" value=\"AM\" />\n        AM\n      </label>\n\n      <label>\n        <input class=\"c-datepicker__toggle c-datepicker__toggle--right c-datepicker__clock--pm\" type=\"radio\" name=\"time-date-toggle\" value=\"PM\" />\n        PM\n      </label>\n    </div>\n    <div class=\"c-datepicker__mask\"></div>\n    <div class=\"c-datepicker__clock__hours js-clock-hours active\">\n      <div class=\"c-datepicker__clock__num\" data-number=\"3\">3</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"4\">4</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"5\">5</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"6\">6</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"7\">7</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"8\">8</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"9\">9</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"10\">10</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"11\">11</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"0\">12</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"1\">1</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"2\">2</div>\n      <div class=\"c-datepicker__clock-hands\">\n        <div class=\"c-datepicker__hour-hand\"></div>\n      </div>\n    </div>\n    <div class=\"c-datepicker__clock__minutes js-clock-minutes\">\n      <div class=\"c-datepicker__clock__num\" data-number=\"15\">15</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"20\">20</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"25\">25</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"30\">30</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"35\">35</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"40\">40</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"45\">45</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"50\">50</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"55\">55</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"0\">0</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"5\">5</div>\n      <div class=\"c-datepicker__clock__num\" data-number=\"10\">10</div>\n      <div class=\"c-datepicker__clock-hands\">\n        <div class=\"c-datepicker__hour-hand\"></div>\n      </div>\n    </div>\n  </div>\n  <div class=\"modal-btns\">\n    <a class=\"c-btn c-btn--flat js-cancel\">Cancel</a>\n    <a class=\"c-btn c-btn--flat js-ok\">OK</a>\n  </div>\n</div>\n";
@@ -34,14 +33,6 @@ var createClass = function () {
   };
 }();
 
-
-
-
-
-
-
-
-
 var inherits = function (subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
@@ -58,16 +49,6 @@ var inherits = function (subClass, superClass) {
   if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 };
 
-
-
-
-
-
-
-
-
-
-
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -75,10 +56,6 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
-
-
-
-
 
 var slicedToArray = function () {
   function sliceIterator(arr, i) {
@@ -117,18 +94,6 @@ var slicedToArray = function () {
     }
   };
 }();
-
-
-
-
-
-
-
-
-
-
-
-
 
 var toConsumableArray = function (arr) {
   if (Array.isArray(arr)) {
@@ -212,10 +177,12 @@ var Events = function () {
 
 var ESC_KEY = 27;
 
+var moment = window.moment;
+
 var prefix = 'c-datepicker';
-var defaults$$1 = function defaults$$1() {
-  return {
-    default: moment().startOf('hour'),
+var defaults = function defaults(globalOverride) {
+  return Object.assign({
+    default: moment().startOf('day'),
     // allow the user to override all the classes
     // used for styling the calendar
     styles: {
@@ -241,14 +208,20 @@ var defaults$$1 = function defaults$$1() {
       timeOption: prefix + '__time-option',
       clockNum: prefix + '__clock__num'
     },
+    i18n: {
+      buttonOK: 'OK',
+      buttonCancel: 'Cancel'
+    },
     // format to display in the input, or set on the element
     format: 'DD/MM/YY',
     // the container to append the picker
     container: document.body,
     // allow any dates
     dateValidator: undefined
-  };
+  }, globalOverride);
 };
+
+var globalOverrideOptions = {};
 
 var DateTimePicker = function (_Events) {
   inherits(DateTimePicker, _Events);
@@ -259,8 +232,10 @@ var DateTimePicker = function (_Events) {
 
     var _this = possibleConstructorReturn(this, (DateTimePicker.__proto__ || Object.getPrototypeOf(DateTimePicker)).call(this));
 
-    var styles = Object.assign(defaults$$1().styles, options.styles);
-    _this.options = Object.assign(defaults$$1(), options);
+    var defaultOptions = defaults(globalOverrideOptions);
+
+    var styles = Object.assign(defaultOptions.styles, options.styles);
+    _this.options = Object.assign(defaultOptions, options);
     _this.options.styles = styles;
 
     // listen to any event
@@ -304,6 +279,9 @@ var DateTimePicker = function (_Events) {
       this.scrimEl = document.body.querySelector('.' + this.options.styles.scrim);
       this.amToggleEl = this.$('.c-datepicker__clock--am');
       this.pmToggleEl = this.$('.c-datepicker__clock--pm');
+
+      this.$('.js-ok').innerText = this.options.i18n.buttonOK;
+      this.$('.js-cancel').innerText = this.options.i18n.buttonCancel;
 
       if (!this.value) {
         // TODO hack
@@ -371,12 +349,12 @@ var DateTimePicker = function (_Events) {
         }
       };
 
-      window.addEventListener("keydown", this._onWindowKeypress);
+      window.addEventListener('keydown', this._onWindowKeypress);
     }
   }, {
     key: '_stopListeningForCloseEvents',
     value: function _stopListeningForCloseEvents() {
-      window.removeEventListener("keydown", this._onWindowKeypress);
+      window.removeEventListener('keydown', this._onWindowKeypress);
       this._closeHandler = null;
     }
   }, {
@@ -600,7 +578,7 @@ var DateTimePicker = function (_Events) {
     }
   }, {
     key: 'get',
-    value: function get$$1() {
+    value: function get() {
       return moment(this.value);
     }
 
@@ -610,7 +588,7 @@ var DateTimePicker = function (_Events) {
 
   }, {
     key: 'set',
-    value: function set$$1(value) {
+    value: function set(value) {
       var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
           _ref$silent = _ref.silent,
           silent = _ref$silent === undefined ? false : _ref$silent;
@@ -725,6 +703,10 @@ var DateTimePicker = function (_Events) {
   return DateTimePicker;
 }(Events);
 
+DateTimePicker.setDefaults = function (defaults) {
+  globalOverrideOptions = defaults;
+};
+
 function _appendTemplate(parent, template) {
   var tempEl = document.createElement('div');
   tempEl.innerHTML = template.trim();
@@ -733,4 +715,3 @@ function _appendTemplate(parent, template) {
 }
 
 export default DateTimePicker;
-//# sourceMappingURL=material-datetime-picker.mjs.map
