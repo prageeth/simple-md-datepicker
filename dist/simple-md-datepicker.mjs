@@ -596,7 +596,7 @@ var DateTimePicker = function (_Events) {
 
       // maintain a list of change events to fire all at once later
       var evts = [];
-      if (m.date() !== this.value.date() || m.month() !== this.value.month() || m.year() !== this.value.year()) {
+      if (!this.value || m.date() !== this.value.date() || m.month() !== this.value.month() || m.year() !== this.value.year()) {
         this.setDate(m);
         evts.push('change:date');
       }
